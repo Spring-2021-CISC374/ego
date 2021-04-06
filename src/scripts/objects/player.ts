@@ -19,7 +19,7 @@ export default class Player  {
 
   constructor(scene,name: string) {
     this.name = name;
-    this.playerDeck = new Deck(12);
+    this.playerDeck = new Deck();
 
     scene.add.existing(this)
     
@@ -44,6 +44,14 @@ export default class Player  {
 
   public addCard(newcard: Card): void{
     this.playerDeck.addCard(newcard);
+  }
+
+  public getName(){
+    return this.name;
+  }
+
+  public getDeck(){
+    return this.playerDeck;
   }
 
 }

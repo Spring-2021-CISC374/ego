@@ -5,9 +5,9 @@ export default class Deck {
   size: number;
   deck: Array<Card>;
 
-  constructor(size: number){
-    this.size = size;
-    this.deck = new Array<Card>(size) ;
+  constructor(){
+    this.size = 12;
+    this.deck = new Array<Card>() ;
 
   }
 
@@ -20,7 +20,16 @@ export default class Deck {
   }
 
   public addCard(newcard : Card){
-
+    this.deck.push(newcard);
   }  
+
+  public getFilledSlots(): number{
+    let count = 0;
+
+    this.deck.forEach(function(value){
+      if(value != null) count++;
+    } );
+    return count;
+  }
 
 }
