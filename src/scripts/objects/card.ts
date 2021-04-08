@@ -10,9 +10,16 @@ export default class Card {
     this.damage = damage;
   }
 
+  public getName(): string{
+    return this.name;
+  }
 
   public getCost(): number{
     return this.cost;
+  }
+
+  public getDamage(): number{
+    return this.damage;
   }
 
   

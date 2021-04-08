@@ -14,12 +14,14 @@ export default class Player  {
   PlayerTurn: boolean = true;
   name: string;
   health: number;
+  maxHealth: number = 100;
   playerDeck: Deck;
   count: number = 0;
 
   constructor(scene,name: string) {
     this.name = name;
     this.playerDeck = new Deck();
+    this.health=this.maxHealth;
 
     scene.add.existing(this)
     
@@ -50,8 +52,26 @@ export default class Player  {
     return this.name;
   }
 
-  public getDeck(){
+  public getDeck() : Deck{
     return this.playerDeck;
+  }
+
+  public getHealth(){
+    return this.health;
+  }
+
+  public getMaxHealth(){
+    return this.maxHealth;
+  }
+
+  public changeHealth(change:number){
+    this.health=this.health+change;
+    if(this.health<0){
+      this.health=0;
+    }
+    else if(this.health>this.maxHealth){
+      this.health=this.maxHealth;
+    }
   }
 
 }

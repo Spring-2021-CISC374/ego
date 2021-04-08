@@ -15,6 +15,10 @@ export default class Deck {
     return this.size;
   }
 
+  public getDeck(){
+    return this.deck;
+  }
+
   public isFull(): boolean{
     return this.deck.length >= this.size;
   }
@@ -30,6 +34,32 @@ export default class Deck {
       if(value != null) count++;
     } );
     return count;
+  }
+
+  public shuffle(): boolean{
+    if(this.getFilledSlots()!=0){
+      var currentIndex = this.getFilledSlots(), temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = this.deck[currentIndex];
+        this.deck[currentIndex] = this.deck[randomIndex];
+        this.deck[randomIndex] = temporaryValue;
+      }
+
+      console.log('Shuffled');
+      return true;
+    }
+    else{
+      console.log('Deck Empty');
+      return false;
+    }
   }
 
 }
