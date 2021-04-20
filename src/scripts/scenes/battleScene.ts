@@ -31,6 +31,8 @@ export default class BattleScene extends Phaser.Scene {
   dealText;
   endText;
   showDeck;
+  healthText;
+  healthBar;
   playerHeath;
 
   enemy;
@@ -126,6 +128,18 @@ export default class BattleScene extends Phaser.Scene {
   }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
   
 
   endTurn(player: Player){
@@ -163,16 +177,72 @@ export default class BattleScene extends Phaser.Scene {
 
   // Draw a card and add to players hand
   drawCard(player: Player){
-    if(player.isTurn()){
-      let num = Math.floor(Math.random() * 2) + 1;
-      if(num == 1){
-        player.addCard( new Card("Attack", 2, 1) );    
-      }else { 
-        player.addCard(new Card("Defend", 3,4));
+   if(player.isTurn()){
+      var randCard=Math.random()*3;
+      if(randCard<1){
+        player.addCard( new Card("Buff", 2, 4) ); 
       }
+      else if(randCard<2){
+        player.addCard( new Card("Heal", 2, 4) ); 
+      }
+      else{
+        player.addCard( new Card("Attack", 2, 4) ); 
+      } 
+      this.endTurn(player);
+      this.player.changeHealth(1);
+    }
+    else{
+      this.player.changeHealth(-1);
     }
     
   }
+
+  makeBar(x, y,color) {
+    let bar = this.add.graphics();
+
+    bar.fillStyle(color, 1);
+
+    bar.fillRect(0, 0, 300, 25);
+    
+    bar.x = x;
+    bar.y = y;
+
+    return bar;
+  }
+
+  setValue(bar,percentage) {
+    bar.scaleX = percentage;
+  }
+
+  showHand(){
+    if(this.player.getDeck()!=null){
+      let c=0;
+      for(let i of this.player.getDeck().getDeck()){
+        let card=this.add.graphics();
+        card.lineStyle(5, 0x000000, 1.0);
+        card.fillStyle(0xFFFFFF, 1.0);
+        card.fillRect((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 70, 100);
+        card.strokeRect((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 70, 100);
+  
+        let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 305,i.getName(),{
+          color: '#000000',
+          fontSize: '18px'
+        });
+        let cardDamage=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+55, 380,i.getDamage(),{
+          color: '#000000',
+          fontSize: '18px'
+        });
+        let cardCost=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 380,i.getCost(),{
+          color: '#000000',
+          fontSize: '18px'
+        });
+        c++;
+  
+      }
+    }
+  }
+
+
 
   update() { 
 
@@ -182,7 +252,7 @@ export default class BattleScene extends Phaser.Scene {
       
     }else if (this.cursors.right.isDown){
       this
-      this.scene.start('BattleScene')
+      this.scene.start('MainScene')
     }else if (this.cursors.up.isDown){
       console.log("Up");
     }else if (this.cursors.down.isDown){
@@ -191,6 +261,9 @@ export default class BattleScene extends Phaser.Scene {
 
 
     this.statusBox.setText(`${(this.player.isTurn()) ? "Player can Draw Card" : "Player cannot draw card"}`)
+    this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
+
+    this.showHand();
   
     if(this.player.getDeck().isFull()){
       this.dealText.removeInteractive();
@@ -200,6 +273,9 @@ export default class BattleScene extends Phaser.Scene {
       this.cardCount.setText(`Cards in Player hand ${this.player.getDeck().getFilledSlots()}`);
     }
     
+    this.healthText.setText(`Current Health: ${this.player.getHealth()}/${this.player.getMaxHealth()}`);
+
+
   }
 
   
