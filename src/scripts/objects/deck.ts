@@ -32,4 +32,9 @@ export default class Deck {
     return count;
   }
 
+  public getDeck(): Card[]{
+    return this.deck;
+  }
+
+
 }
