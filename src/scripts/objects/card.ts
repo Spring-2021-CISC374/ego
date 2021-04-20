@@ -31,14 +31,5 @@ export default class Card {
     return this.name;
   }
 
-  public getCost(): number{
-    return this.cost;
-  }
-
-  public getDamage(): number{
-    return this.damage;
-  }
-
-  
 
 }
