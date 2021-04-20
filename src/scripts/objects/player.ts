@@ -9,7 +9,7 @@
 import Deck from './deck';
 import Card from './card';
 
-export default class Player  {
+export default class Player  extends Phaser.GameObjects.GameObject{
 
   PlayerTurn: boolean = true;
   name: string;
@@ -17,9 +17,12 @@ export default class Player  {
   maxHealth: number = 100;
   playerDeck: Deck;
   count: number = 0;
+  position: number[] = [0,0]
 
   constructor(scene,name: string) {
+    super(scene, 'sprite')
     this.name = name;
+    this.health = 100;
     this.playerDeck = new Deck();
     this.health=this.maxHealth;
 
@@ -27,13 +30,20 @@ export default class Player  {
     
   }
 
+  public create(){
+
+  }
+
   public update() {
-    this.count += 1;
-    if(this.count % 200 == 0){
-      this.changeTurn();
-      console.log(this.isTurn());
-      this.count = 0;
-    }
+    // this.count += 1;
+    // if(this.count % 200 == 0){
+    //   this.changeTurn();
+    //   console.log(this.isTurn());
+    //   this.count = 0;
+    // }
+
+
+
   }
 
   public isTurn(): boolean {
@@ -72,6 +82,21 @@ export default class Player  {
     else if(this.health>this.maxHealth){
       this.health=this.maxHealth;
     }
+
+  
+  }
+
+  public setHealth(health){
+    this.health = health;
+  }
+
+  public setPosition( x: number ,y: number): void{
+    this.position[0] = x;
+    this.position[1] = y;
+  }
+
+  public getPosition(): number[]{
+    return this.position;
   }
 
 }
