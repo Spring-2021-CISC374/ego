@@ -16,11 +16,13 @@ export default class Player  {
   health: number;
   maxHealth: number = 100;
   playerDeck: Deck;
+  playerHand: Deck;
   count: number = 0;
 
   constructor(scene,name: string) {
     this.name = name;
-    this.playerDeck = new Deck();
+    this.playerDeck = new Deck(30);
+    this.playerHand = new Deck(12);
     this.health=this.maxHealth;
 
     scene.add.existing(this)
@@ -44,8 +46,13 @@ export default class Player  {
     this.PlayerTurn = !this.PlayerTurn;
   }
 
-  public addCard(newcard: Card): void{
+  public addToDeck(newcard: Card): void{
     this.playerDeck.addCard(newcard);
+  }
+
+  public addToHand(newcard: Card): void{
+    this.playerHand.addCard(newcard);
+    this.playerDeck.deck.splice(0,1);
   }
 
   public getName(){
@@ -54,6 +61,10 @@ export default class Player  {
 
   public getDeck() : Deck{
     return this.playerDeck;
+  }
+
+  public getHand():Deck{
+    return this.playerHand;
   }
 
   public getHealth(){

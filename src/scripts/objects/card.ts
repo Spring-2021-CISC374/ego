@@ -12,24 +12,21 @@ export default class Card {
     this.happiness= happiness;
 
   }
-  cards: Array<Card>=[
-    new Card("Little Helper", "Health Recovery", 1, 3),
-    new Card("Pick Me Up", "Health Recovery", 2, 5),
-    new Card("Super Smile", "Health Recovery", 3, 7),
-    new Card("Reflect", "Attack", 4, 7),
-    new Card("Recover", "Health Recovery", 2, 3),
-    new Card("Boom", "Attack", 3, 5),
-    new Card("Shield", "Defense", 2, 3),
-    new Card("Lightning Bolt", "Attack", 2, 3),  
-    new Card("Bloodlust", "Attack", 4, 7),
-    new Card("Counting Sheep", "Attack", 3, 5),
-    new Card("Power Boost", "Defense", 4,7)
-  ]
-
 
   public getName(): string{
     return this.name;
   }
 
+  public getRank(): number{
+    return this.rank;
+  }
+
+  public getType(): string{
+    return this.type;
+  }
+
+  public getHappiness(): number{
+    return this.happiness;
+  }
 
 }
