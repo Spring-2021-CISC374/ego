@@ -4,12 +4,14 @@ export default class Card {
   type: string;
   rank: number;
   happiness: number;
+  energy: number;
 
-  constructor(name: string, type: string, rank: number, happiness: number){
+  constructor(name: string, type: string, rank: number, happiness: number, energy: number){
     this.name = name;
     this.type= type;
     this.rank= rank;
     this.happiness= happiness;
+    this.energy= energy;
 
   }
 
