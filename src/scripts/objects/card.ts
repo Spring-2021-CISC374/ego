@@ -5,6 +5,8 @@ export default class Card {
   rank: number;
   happiness: number;
   energy: number;
+  damage : number;
+  cost: number;
 
   constructor(name: string, type: string, rank: number, happiness: number, energy: number){
     this.name = name;
@@ -30,5 +32,10 @@ export default class Card {
   public getHappiness(): number{
     return this.happiness;
   }
+
+  
+
+
+
 
 }
