@@ -5,8 +5,8 @@ export default class Deck {
   size: number;
   deck: Array<Card>;
 
-  constructor(){
-    this.size = 12;
+  constructor(size:number){
+    this.size = size;
     this.deck = new Array<Card>() ;
 
   }

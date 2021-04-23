@@ -2,7 +2,7 @@ import PhaserLogo from '../objects/phaserLogo';
 import FpsText from '../objects/fpsText';
 import Player from '../objects/player';
 import Card from '../objects/card'
-import BattleScene from './battleScene'
+// import BattleScene from './battleScene'
 export default class MainScene extends Phaser.Scene {
     
   cursors: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -51,6 +51,8 @@ export default class MainScene extends Phaser.Scene {
 
     this.player = new Player(this,"bob");// Player object
     this.enemy = new Player(this,"Computer");// Enemy player object
+    this.initializeDeck();
+    
   
 
     this.playerSprite = this.add.sprite(this.cameras.main.width / 2,this.cameras.main.height / 2, 'player'); // Player Sprite
@@ -119,12 +121,38 @@ export default class MainScene extends Phaser.Scene {
   this.healthBar=this.makeBar(100, 50, 0xe74c3c);
   this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
 
+  this.healthBar=this.makeBar(100, 50, 0xe74c3c);
+  this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
+  
+  }
 
-
+  initializeDeck(){
+    this.player.addToDeck(new Card("Little Helper", "Health Recovery", 1, 3,1));
+    this.player.addToDeck(new Card("Pick Me Up", "Health Recovery", 2, 5,1));
+    this.player.addToDeck(new Card("Super Smile", "Health Recovery", 3, 7,1));
+    this.player.addToDeck(new Card("Reflect", "Attack", 4, 7,1));
+    this.player.addToDeck(new Card("Recover", "Health Recovery", 2, 3,1));
+    this.player.addToDeck(new Card("Boom", "Attack", 3, 5,1));
+    this.player.addToDeck(new Card("Shield", "Defense", 2, 3,1));
+    this.player.addToDeck(new Card("Lightning Bolt", "Attack", 2, 3,1));
+    this.player.addToDeck(new Card("Bloodlust", "Attack", 4, 7,1));
+    this.player.addToDeck(new Card("Counting Sheep", "Attack", 3, 5,1));
+    this.player.addToDeck(new Card("Power Boost", "Defense", 4,7,1));
+    this.player.playerDeck.shuffle();
+    this.enemy.addToDeck(new Card("Little Helper", "Health Recovery", 1, 3,1));
+    this.enemy.addToDeck(new Card("Pick Me Up", "Health Recovery", 2, 5,1));
+    this.enemy.addToDeck(new Card("Super Smile", "Health Recovery", 3, 7,1));
+    this.enemy.addToDeck(new Card("Reflect", "Attack", 4, 7,1));
+    this.enemy.addToDeck(new Card("Recover", "Health Recovery", 2, 3,1));
+    this.enemy.addToDeck(new Card("Boom", "Attack", 3, 5,1));
+    this.enemy.addToDeck(new Card("Shield", "Defense", 2, 3,1));
+    this.enemy.addToDeck(new Card("Lightning Bolt", "Attack", 2, 3,1));
+    this.enemy.addToDeck(new Card("Bloodlust", "Attack", 4, 7,1));
+    this.enemy.addToDeck(new Card("Counting Sheep", "Attack", 3, 5,1));
+    this.enemy.addToDeck(new Card("Power Boost", "Defense", 4,7,1));
 
 
   }
-
 
   endTurn(player: Player){
     player.changeTurn();
@@ -137,7 +165,8 @@ export default class MainScene extends Phaser.Scene {
       this.drawCard(this.enemy);
       this.displayDeck(this.enemy);
     }
-    console.log(player.isTurn());
+    
+    //console.log(player.isTurn());
   }
 
   //Show Players Deck
@@ -160,19 +189,11 @@ export default class MainScene extends Phaser.Scene {
 
   // Draw a card and add to players hand
   drawCard(player: Player){
-   if(player.isTurn()){
-      var randCard=Math.random()*3;
-      if(randCard<1){
-        player.addCard( new Card("Buff", 2, 4) ); 
-      }
-      else if(randCard<2){
-        player.addCard( new Card("Heal", 2, 4) ); 
-      }
-      else{
-        player.addCard( new Card("Attack", 2, 4) ); 
-      } 
+    if(player.isTurn()){
+      player.addToHand(player.playerDeck.deck[0])
+      console.log(player.playerDeck);
+      console.log(player.playerHand);
       // this.endTurn(player);
-      
       this.player.changeHealth(1);
     }
     else{
@@ -198,26 +219,28 @@ export default class MainScene extends Phaser.Scene {
   setValue(bar,percentage) {
     bar.scaleX = percentage;
   }
+  
+s
 
   showHand(){
-    if(this.player.getDeck()!=null){
+    if(this.player.getHand()!=null){
       let c=0;
-      for(let i of this.player.getDeck().getDeck()){
+      for(let i of this.player.getHand().getDeck()){
         let card=this.add.graphics();
         card.lineStyle(5, 0x000000, 1.0);
         card.fillStyle(0xFFFFFF, 1.0);
-        card.fillRect((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 70, 100);
-        card.strokeRect((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 70, 100);
+        card.fillRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), 300, 70, 100);
+        card.strokeRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), 300, 70, 100);
   
-        let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 305,i.getName(),{
+        let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, 305,i.getName(),{
+          color: '#000000',
+          fontSize: '14px'
+        });
+        let cardHappiness=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+55, 380,i.getHappiness(),{
           color: '#000000',
           fontSize: '18px'
         });
-        let cardDamage=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+55, 380,i.getDamage(),{
-          color: '#000000',
-          fontSize: '18px'
-        });
-        let cardCost=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 380,i.getCost(),{
+        let cardRank=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, 380,i.getRank(),{
           color: '#000000',
           fontSize: '18px'
         });
@@ -230,6 +253,7 @@ export default class MainScene extends Phaser.Scene {
 
 
   update() { 
+
 
     const speed = 10;
     /**Movement  */
@@ -244,13 +268,11 @@ export default class MainScene extends Phaser.Scene {
       console.log("Down");
     }
 
-
+    this.showHand();
     this.statusBox.setText(`${(this.player.isTurn()) ? "Player can Draw Card" : "Player cannot draw card"}`)
     this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
 
-    this.showHand();
-  
-    if(this.player.getDeck().isFull()){
+    if(this.player.getHand().isFull()){
       this.dealText.removeInteractive();
       this.cardCount.setText(`Players hand it full - Count: ${this.player.getDeck().getFilledSlots()}`);
     }else {
