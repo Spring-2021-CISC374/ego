@@ -16,6 +16,7 @@ export default class Player  extends Phaser.GameObjects.GameObject{
   health: number;
   maxHealth: number = 100;
   playerDeck: Deck;
+  playerHand: Deck;
   count: number = 0;
   position: number[] = [0,0]
 
@@ -23,7 +24,8 @@ export default class Player  extends Phaser.GameObjects.GameObject{
     super(scene, 'sprite')
     this.name = name;
     this.health = 100;
-    this.playerDeck = new Deck();
+    this.playerDeck = new Deck(30);
+    this.playerHand = new Deck(12);
     this.health=this.maxHealth;
 
     scene.add.existing(this)
@@ -54,8 +56,13 @@ export default class Player  extends Phaser.GameObjects.GameObject{
     this.PlayerTurn = !this.PlayerTurn;
   }
 
-  public addCard(newcard: Card): void{
+  public addToDeck(newcard: Card): void{
     this.playerDeck.addCard(newcard);
+  }
+
+  public addToHand(newcard: Card): void{
+    this.playerHand.addCard(newcard);
+    this.playerDeck.deck.splice(0,1);
   }
 
   public getName(){
@@ -64,6 +71,10 @@ export default class Player  extends Phaser.GameObjects.GameObject{
 
   public getDeck() : Deck{
     return this.playerDeck;
+  }
+
+  public getHand():Deck{
+    return this.playerHand;
   }
 
   public getHealth(){

@@ -1,7 +1,7 @@
 import 'phaser'
 import MainScene from './scenes/mainScene'
 import PreloadScene from './scenes/preloadScene'
-import BattleScene from './scenes/battleScene';
+// import BattleScene from './scenes/battleScene';
 
 const DEFAULT_WIDTH = 1280
 const DEFAULT_HEIGHT = 720
@@ -16,7 +16,7 @@ const config = {
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT
   },
-  scene: [PreloadScene, MainScene, BattleScene],
+  scene: [PreloadScene, MainScene],
   physics: {
     default: 'arcade',
     arcade: {
