@@ -1,3 +1,5 @@
+<h1>ALPHA is in branch : merge/show-cards-scene-trigger. Once inside run : NPM RUN START</h1>
+
 <h3 align="center">
 Zendelle:
  * Implemented Card drawing system| Card and Deck Object - Done
