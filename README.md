@@ -1,4 +1,4 @@
-<h1>ALPHA is in branch : merge/show-cards-scene-trigger. Once inside run : NPM RUN START</h1>
+<h1>ALPHA is in branch : merge/show-cards-scene-trigger. Once inside run : NPM RUN START. Trigger the next scene by clicking right arrow key. Draw cards by selecting the draw card, shuffle card by selecting shufle. Change turn by selecting change turn</h1>
 
 <h3 align="center">
 Zendelle:
