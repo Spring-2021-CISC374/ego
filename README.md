@@ -1,14 +1,19 @@
 <h3 align="center">
-Zendelle:
+
+TO RUN ALPHA: NPM RUN START
+
+<ul>Zendelle:
  * Implemented Card drawing system| Card and Deck Object - Done
  * Create Enemy Object - Done
  * Have computer Draw cards - Done
  * Show computer health - Done
-Sam  :
+ </ul>
+<ul>Sam  :
  * Show cards in hand - Done
     * Temp Graphic for card - Done
  * Show player health - Done
  * Create pseudo random card generator - Done for now
+ </ul>
 </h3>
 
 
