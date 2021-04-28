@@ -221,12 +221,76 @@ export default class BattleScene extends Phaser.Scene {
     if(this.player.getDeck()!=null){
       let c=0;
       for(let i of this.player.getDeck().getDeck()){
+        //this.loadCardSprite(i, (c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300);
+        
         let card=this.add.graphics();
         card.lineStyle(5, 0x000000, 1.0);
         card.fillStyle(0xFFFFFF, 1.0);
         card.fillRect((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 70, 100);
         card.strokeRect((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 70, 100);
-  
+        /*
+        if (i.getName() == "Buff"){
+          let card = this.add.sprite((c+1) * (this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 'buffCardBase');
+          card.displayWidth = 70;
+          card.displayHeight = 100;
+          card.setOrigin(0,0);
+
+          let cardText = this.add.text((c+1) * (this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 305, i.getName(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+          let cardDamage=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+55, 380,i.getDamage(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+          let cardCost=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 380,i.getCost(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+
+        }
+
+        else if(i.getName() == "Attack"){
+          let card = this.add.sprite((c+1) * (this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 'attackCardBase');
+          card.displayWidth = 70;
+          card.displayHeight = 100;
+          card.setOrigin(0,0);  
+
+          let cardText = this.add.text((c+1) * (this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 305, i.getName(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+          let cardDamage=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+55, 380,i.getDamage(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+          let cardCost=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 380,i.getCost(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+        }
+
+        else if(i.getName() == "Heal"){
+          let card = this.add.sprite((c+1) * (this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 'healCardBase');
+          card.displayWidth = 70;
+          card.displayHeight = 100;
+          card.setOrigin(0,0);
+
+          let cardText = this.add.text((c+1) * (this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 305, i.getName(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+          let cardDamage=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+55, 380,i.getDamage(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+          let cardCost=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 380,i.getCost(),{
+            color: '#000000',
+            fontSize: '18px'
+          });
+        }
+
+        */
         let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 305,i.getName(),{
           color: '#000000',
           fontSize: '18px'
@@ -239,10 +303,52 @@ export default class BattleScene extends Phaser.Scene {
           color: '#000000',
           fontSize: '18px'
         });
+        
         c++;
   
       }
     }
+  }
+
+  loadCardSprite(card, x, y){
+
+    if (card.getName() == "Attack"){
+      let cardSprite = this.add.sprite(x, y, 'attackCardBase');
+      cardSprite.setOrigin(0,0);
+      cardSprite.displayHeight = 110;
+      cardSprite.displayWidth = 75;
+    }
+
+    else if (card.getName() == "Heal"){
+      let cardSprite = this.add.sprite(x, y, 'healCardBase');
+      cardSprite.setOrigin(0,0);
+      cardSprite.displayHeight = 110;
+      cardSprite.displayWidth = 75;
+    }
+
+    else if (card.getName() == "Buff"){
+      let cardSprite = this.add.sprite(x, y, 'buffCardBase');
+      cardSprite.setOrigin(0,0);
+      cardSprite.displayHeight = 110;
+      cardSprite.displayWidth = 75;
+    }
+
+    
+
+    let cardText = this.add.text(x + 5, y + 5, card.getName(),{
+      color: '#000000',
+      fontSize: '18px'
+    });
+
+    let cardDamage=this.add.text(x + 55, y + 80, card.getDamage(),{
+      color: '#000000',
+      fontSize: '18px'
+    });
+
+    let cardCost=this.add.text(x + 5, y + 80, card.getCost(),{
+      color: '#000000',
+      fontSize: '18px'
+    });
   }
 
 
