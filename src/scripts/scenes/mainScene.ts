@@ -19,7 +19,9 @@ export default class MainScene extends Phaser.Scene {
   shuffleText
   enemy;
   enemyHealth;
-
+  enemyHealthBar;
+  enemyEnergyBar;
+  enemyEnergy;
   message;
   statusBox;
   cardCount;
@@ -79,10 +81,18 @@ export default class MainScene extends Phaser.Scene {
   // })
 
   //Enemy Player Show health
-  this.enemyHealth= this.add.text(this.cameras.main.width - 800, 15 , `Enemy health: ${this.enemy.getHealth()}`, {
+  this.enemyHealth= this.add.text(350, this.cameras.main.height / 2 - 75  , `Enemy Health: ${this.enemy.getHealth()}`, {
     color: '#000000',
-    fontSize: '24px'
+    fontSize: '24px',
+
   })
+
+  this.enemyHealth= this.add.text(350, this.cameras.main.height / 2 - 45  , `Enemy Energy: ${100}`, {
+    color: '#000000',
+    fontSize: '24px',
+
+  })
+
 
   //Show Hand button
   // this.showDeck = this.add.text(50,50,'Show Deck', {
@@ -121,8 +131,12 @@ export default class MainScene extends Phaser.Scene {
   this.healthBar=this.makeBar(100, 50, 0xe74c3c);
   this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
 
-  this.healthBar=this.makeBar(100, 50, 0xe74c3c);
-  this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
+  this.enemyHealthBar=this.makeBar(15, this.cameras.main.height / 2 - 75 , 0xe74c3c);
+  this.setValue(this.enemyHealthBar,this.enemy.getHealth()/this.enemy.getMaxHealth());
+
+  this.enemyEnergyBar=this.makeBar(15, this.cameras.main.height / 2 - 45 , 0x000080);
+  this.setValue(this.enemyEnergyBar,100/*CURRENT ENERGY GOES HERE *// 100 /**MAX ENERGY GOES HERE */);
+
   
   }
 
