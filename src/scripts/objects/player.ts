@@ -17,6 +17,7 @@ export default class Player  extends Phaser.GameObjects.GameObject{
   maxHealth: number = 100;
   playerDeck: Deck;
   playerHand: Deck;
+  discardPile: Deck;
   count: number = 0;
   position: number[] = [0,0]
 
@@ -26,6 +27,7 @@ export default class Player  extends Phaser.GameObjects.GameObject{
     this.health = 100;
     this.playerDeck = new Deck(30);
     this.playerHand = new Deck(12);
+    this.discardPile = new Deck(30);
     this.health=this.maxHealth;
 
     scene.add.existing(this)
