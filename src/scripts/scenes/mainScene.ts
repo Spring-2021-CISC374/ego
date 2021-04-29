@@ -105,7 +105,7 @@ export default class MainScene extends Phaser.Scene {
   }).setOrigin(1, 0)
 
   //Sams Addition
-  this.healthText=this.add.text(100, 15, `Current Health: ${this.player.getHealth()}/${this.player.getMaxHealth()}`,{
+  this.healthText=this.add.text(900, 600, `Current Health: ${this.player.getHealth()}/${this.player.getMaxHealth()}`,{
     color: '#000000',
     fontSize: '24px'
   })
@@ -118,26 +118,38 @@ export default class MainScene extends Phaser.Scene {
   .setInteractive()
   .on('pointerdown', ()=>this.player.playerDeck.shuffle())
 
-  this.healthBar=this.makeBar(100, 50, 0xe74c3c);
+  this.healthBar=this.makeBar(900, 650, 0xe74c3c);
   this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
 
-  this.healthBar=this.makeBar(100, 50, 0xe74c3c);
+  this.healthBar=this.makeBar(900, 650, 0xe74c3c);
   this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
   
   }
-
+  // I shortened the card names just so they would fit for now until we get the 
+  //actual cards and I will add descriptions to each card (in comments)
   initializeDeck(){
-    this.player.addToDeck(new Card("Little Helper", "Health Recovery", 1, 3,1));
-    this.player.addToDeck(new Card("Pick Me Up", "Health Recovery", 2, 5,1));
-    this.player.addToDeck(new Card("Super Smile", "Health Recovery", 3, 7,1));
+    //Little Helper Card that helps the player recover
+    this.player.addToDeck(new Card("LH", "Health Recovery", 1, 3,1));
+    //Pick Me Up Card: 
+    this.player.addToDeck(new Card("PMU", "Health Recovery", 2, 5,1));
+    //Super Smile: 
+    this.player.addToDeck(new Card("SS", "Health Recovery", 3, 7,1));
+    //Reflect: 
     this.player.addToDeck(new Card("Reflect", "Attack", 4, 7,1));
+    //Recover:
     this.player.addToDeck(new Card("Recover", "Health Recovery", 2, 3,1));
+    //Boom:
     this.player.addToDeck(new Card("Boom", "Attack", 3, 5,1));
+    //Shield:
     this.player.addToDeck(new Card("Shield", "Defense", 2, 3,1));
-    this.player.addToDeck(new Card("Lightning Bolt", "Attack", 2, 3,1));
-    this.player.addToDeck(new Card("Bloodlust", "Attack", 4, 7,1));
-    this.player.addToDeck(new Card("Counting Sheep", "Attack", 3, 5,1));
-    this.player.addToDeck(new Card("Power Boost", "Defense", 4,7,1));
+    //Lightning Bolt: 
+    this.player.addToDeck(new Card("LB", "Attack", 2, 3,1));
+    //BloodLust:
+    this.player.addToDeck(new Card("BL", "Attack", 4, 7,1));
+    //Counting Sheep:
+    this.player.addToDeck(new Card("CS", "Attack", 3, 5,1));
+    //Power Boost: 
+    this.player.addToDeck(new Card("PB", "Defense", 4,7,1));
     this.player.playerDeck.shuffle();
     this.enemy.addToDeck(new Card("Little Helper", "Health Recovery", 1, 3,1));
     this.enemy.addToDeck(new Card("Pick Me Up", "Health Recovery", 2, 5,1));
@@ -229,18 +241,18 @@ s
         let card=this.add.graphics();
         card.lineStyle(5, 0x000000, 1.0);
         card.fillStyle(0xFFFFFF, 1.0);
-        card.fillRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), 300, 70, 100);
-        card.strokeRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), 300, 70, 100);
+        card.fillRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), 600, 70, 100);
+        card.strokeRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), 600, 70, 100);
   
-        let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, 305,i.getName(),{
+        let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, 605,i.getName(),{
           color: '#000000',
           fontSize: '14px'
         });
-        let cardHappiness=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+55, 380,i.getHappiness(),{
+        let cardHappiness=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+55, 680,i.getHappiness(),{
           color: '#000000',
           fontSize: '18px'
         });
-        let cardRank=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, 380,i.getRank(),{
+        let cardRank=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, 680,i.getRank(),{
           color: '#000000',
           fontSize: '18px'
         });
