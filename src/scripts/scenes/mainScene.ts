@@ -190,14 +190,17 @@ export default class MainScene extends Phaser.Scene {
   // Draw a card and add to players hand
   drawCard(player: Player){
     if(player.isTurn()){
-      player.addToHand(player.playerDeck.deck[0])
-      console.log(player.playerDeck);
-      console.log(player.playerHand);
-      // this.endTurn(player);
-      this.player.changeHealth(1);
-    }
-    else{
-      this.player.changeHealth(-1);
+      if(player.playerDeck.deck.length!=0){
+        player.addToHand(player.playerDeck.deck[0])
+        console.log(player.playerDeck);
+        console.log(player.playerHand);
+        // this.endTurn(player);
+      }
+      else{
+        player.playerDeck=player.discardPile;
+        player.playerDeck.shuffle();
+
+      }
     }
     this.showHand();
     
@@ -219,8 +222,6 @@ export default class MainScene extends Phaser.Scene {
   setValue(bar,percentage) {
     bar.scaleX = percentage;
   }
-  
-s
 
   showHand(){
     if(this.player.getHand()!=null){

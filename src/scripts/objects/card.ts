@@ -33,6 +33,10 @@ export default class Card {
     return this.happiness;
   }
 
+  public getEnergy(): number{
+    return this.energy;
+  }
+
   
 
 
