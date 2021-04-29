@@ -20,6 +20,8 @@ export default class Player  extends Phaser.GameObjects.GameObject{
   discardPile: Deck;
   count: number = 0;
   position: number[] = [0,0]
+  energy: number;
+  maxEnergy: number = 10;
 
   constructor(scene,name: string) {
     super(scene, 'sprite')
@@ -87,6 +89,10 @@ export default class Player  extends Phaser.GameObjects.GameObject{
     return this.maxHealth;
   }
 
+  public getEnergy(){
+    return this.energy;
+  }
+
   public changeHealth(change:number){
     this.health=this.health+change;
     if(this.health<0){
@@ -94,6 +100,18 @@ export default class Player  extends Phaser.GameObjects.GameObject{
     }
     else if(this.health>this.maxHealth){
       this.health=this.maxHealth;
+    }
+
+  
+  }
+
+  public changeEnergy(change:number){
+    this.energy=this.energy+change;
+    if(this.energy<0){
+      this.health=0;
+    }
+    else if(this.energy>this.maxEnergy){
+      this.energy=this.maxEnergy;
     }
 
   

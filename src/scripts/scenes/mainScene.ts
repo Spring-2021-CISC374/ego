@@ -52,6 +52,7 @@ export default class MainScene extends Phaser.Scene {
     this.player = new Player(this,"bob");// Player object
     this.enemy = new Player(this,"Computer");// Enemy player object
     this.initializeDeck();
+    this.initializeHand();
     
   
 
@@ -150,8 +151,22 @@ export default class MainScene extends Phaser.Scene {
     this.enemy.addToDeck(new Card("Bloodlust", "Attack", 4, 7,1));
     this.enemy.addToDeck(new Card("Counting Sheep", "Attack", 3, 5,1));
     this.enemy.addToDeck(new Card("Power Boost", "Defense", 4,7,1));
+    this.enemy.playerDeck.shuffle();
 
 
+  }
+
+  initializeHand(){
+    this.drawCard(this.player);
+    this.drawCard(this.player);
+    this.drawCard(this.player);
+    this.drawCard(this.player);
+    this.drawCard(this.player);
+    this.drawCard(this.enemy);
+    this.drawCard(this.enemy);
+    this.drawCard(this.enemy);
+    this.drawCard(this.enemy);
+    this.drawCard(this.enemy);
   }
 
   endTurn(player: Player){
@@ -160,9 +175,6 @@ export default class MainScene extends Phaser.Scene {
       this.clickButton.setText(`Change turn: It is ${player.getName()}'s turn `);  
     }else{
       this.clickButton.setText(`Change turn: It is the computer's turn`);
-      this.drawCard(this.enemy);
-      this.drawCard(this.enemy);
-      this.drawCard(this.enemy);
       this.displayDeck(this.enemy);
     }
     
@@ -199,6 +211,8 @@ export default class MainScene extends Phaser.Scene {
       else{
         player.playerDeck=player.discardPile;
         player.playerDeck.shuffle();
+        player.discardPile.deck=[];
+        player.changeHealth(-10);
 
       }
     }
