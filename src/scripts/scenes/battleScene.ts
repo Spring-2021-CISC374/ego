@@ -38,11 +38,17 @@ export default class BattleScene extends Phaser.Scene {
   enemy;
   enemyHealth;
 
+  
+
+  playerDrawDeck;
+  enemyDrawDeck;
+
   message;
   statusBox;
   cardCount;
 
   playerSprite;
+  background;
   
   constructor() {
     super({ key: 'BattleScene' })
@@ -62,23 +68,59 @@ export default class BattleScene extends Phaser.Scene {
         fontSize: '24px'
       })
       .setOrigin(1, 0)
+
+
+      this.load.image('background', 'src/assets/img/background.png');
+      
+      let cardLoadIncrementor = 1;
+      while (cardLoadIncrementor <= 18){
+        this.load.image('card' + cardLoadIncrementor, 'src/assets/img/cards/egoCard-' + cardLoadIncrementor + '.png');
+        cardLoadIncrementor ++;
+      }
+
+      
+      
     
   }
 
   create() {
+    var height;
+    var width;
+
+    
+
+    if (typeof this.game.config.height === "number"){
+      height = this.game.config.height;
+    }
+
+    if (typeof this.game.config.width === "number"){
+      width = this.game.config.width;
+    }
 
     this.player = new Player(this,"bob");// Player object
     this.enemy = new Player(this,"Computer");// Enemy player object
   
 
     this.playerSprite = this.add.sprite(this.cameras.main.width / 2,this.cameras.main.height / 2, 'player'); // Player Sprite
+    //Add and set background
+    this.background = this.add.image(0, 0, 'background').setOrigin(0,0);
+    this.background.setDisplaySize(width, height);
 
-    this.dealText = this.add.text(100, 150, ['DRAW CARD'])
-    .setFontSize(18)
-    .setFontFamily('Trebuchet MS')
-    .setColor('#000000')
-    .setInteractive()
-    .on('pointerdown', () => this.drawCard(this.player));
+    //Add and set player and enemy deck sprites
+    this.playerDrawDeck = this.add.sprite(20 , 700, 'card1').setDisplaySize(130, 150).setOrigin(0,1);
+    this.playerDrawDeck.setInteractive().on('pointerdown', () => this.drawCard(this.player));
+
+    this.enemyDrawDeck = this.add.sprite(1120, 180, 'card1').setDisplaySize(130, 150).setOrigin(1, 0);
+    this.enemyDrawDeck.setAngle(180);
+
+    //Add enemy and player Card Zones
+    let playerCardZone = this.add.rectangle(200, 700, 1000, 160, 0x000000).setAlpha(.7).setOrigin(0,1);
+    let enemyCardZone = this.add.rectangle(80, 190, 1000, 160, 0x000000).setAlpha(.7).setOrigin(0,1);
+
+    //Add enemy and player Discard Pile Zones
+    let playerDiscardPile = this.add.rectangle(1100, 530, 140, 160, 0x000000).setOrigin(0,1).setAlpha(.5);
+    let enemyDiscardPile = this.add.rectangle(50, 365, 140, 160, 0x000000).setOrigin(0,1).setAlpha(.5);
+    
 
     //Interactive Text Box
   this.clickButton = this.add.text(100, 100, `Change turn`, {
@@ -179,7 +221,95 @@ export default class BattleScene extends Phaser.Scene {
   // Draw a card and add to players hand
   drawCard(player: Player){
    if(player.isTurn()){
-      var randCard=Math.random()*3;
+      var randCard = 1 + Math.floor((Math.random()*17));
+      console.log(randCard);
+      switch(randCard){
+        case 1: {
+          player.addCard(new Card("Little Helper", 1, 0, 2));
+          break;
+        }
+
+        case 2: {
+          player.addCard(new Card("Pick Me Up", 2, 0, 3));
+          break;
+        }
+
+        case 3: {
+          player.addCard(new Card("Super Smile", 3, 0, 4));
+          break;
+        }
+
+        case 4: {
+          player.addCard(new Card("Recover", 2, 0, 5));
+          break;
+        }
+
+        case 5: {
+          player.addCard(new Card("Reflect", 4, 7, 6));
+          break;
+        }
+
+        case 6: {
+          player.addCard(new Card("Boom", 3, 5, 7));
+          break;
+        }
+
+        case 7: {
+          player.addCard(new Card("BloodLust", 4, 7, 8));
+          break;
+        }
+
+        case 8: {
+          player.addCard(new Card("Lightning Bolt", 2, 3, 9));
+          break;
+        }
+
+        case 9: {
+          player.addCard(new Card("Counting Sheep", 3, 5, 10));
+          break;
+        }
+
+        case 10: {
+          player.addCard(new Card("Shield", 2, 0, 11));
+          break;
+        }
+
+        case 11: {
+          player.addCard(new Card("Power Boost", 3, 0, 12));
+          break;
+        }
+
+        case 12: {
+          player.addCard(new Card("Reflection Shield", 5, 0, 13));
+          break;
+        }
+
+        case 13: {
+          player.addCard(new Card("Fresh Water", 0, 0, 14));
+          break;
+        }
+
+        case 14: {
+          player.addCard(new Card("Home Cooked Meal", 0, 0, 15));
+          break;
+        }
+
+        case 15: {
+          player.addCard(new Card("Apple", 0, 0, 16));
+          break;
+        }
+
+        case 16: {
+          player.addCard(new Card("Win/Win Situation", 5, 5, 17));
+          break;
+        }
+
+        case 17:{
+          player.addCard(new Card("Power Nap", 5, 0, 18));
+          break;
+        }
+      }
+      /*
       if(randCard<1){
         player.addCard( new Card("Buff", 2, 4) ); 
       }
@@ -188,7 +318,8 @@ export default class BattleScene extends Phaser.Scene {
       }
       else{
         player.addCard( new Card("Attack", 2, 4) ); 
-      } 
+      }
+      */
       // this.endTurn(player);
       
       this.player.changeHealth(1);
@@ -219,11 +350,11 @@ export default class BattleScene extends Phaser.Scene {
 
   showHand(){
     if(this.player.getDeck()!=null){
-      let c=0;
+      let c=1;
       for(let i of this.player.getDeck().getDeck()){
-        //this.loadCardSprite(i, (c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300);
+        this.loadCardSprite(i, (c * 130) + 100, 700);
         
-        let card=this.add.graphics();
+        /*let card=this.add.graphics();
         card.lineStyle(5, 0x000000, 1.0);
         card.fillStyle(0xFFFFFF, 1.0);
         card.fillRect((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2)), 300, 70, 100);
@@ -290,7 +421,7 @@ export default class BattleScene extends Phaser.Scene {
           });
         }
 
-        */
+        
         let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getDeck().getSize()+2))+5, 305,i.getName(),{
           color: '#000000',
           fontSize: '18px'
@@ -303,15 +434,20 @@ export default class BattleScene extends Phaser.Scene {
           color: '#000000',
           fontSize: '18px'
         });
-        
+        */
         c++;
   
       }
     }
   }
 
+  //Loads card sprite
   loadCardSprite(card, x, y){
+    let cardSprite = this.add.sprite(x, y, 'card' + card.getIndex()).setInteractive();
+    cardSprite.setOrigin(0, 1);
+    cardSprite.setDisplaySize(130, 150);
 
+    /*
     if (card.getName() == "Attack"){
       let cardSprite = this.add.sprite(x, y, 'attackCardBase');
       cardSprite.setOrigin(0,0);
@@ -349,6 +485,7 @@ export default class BattleScene extends Phaser.Scene {
       color: '#000000',
       fontSize: '18px'
     });
+    */
   }
 
 
@@ -368,6 +505,7 @@ export default class BattleScene extends Phaser.Scene {
       console.log("Down");
     }
 
+    
 
     this.statusBox.setText(`${(this.player.isTurn()) ? "Player can Draw Card" : "Player cannot draw card"}`)
     this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
@@ -375,10 +513,10 @@ export default class BattleScene extends Phaser.Scene {
     this.showHand();
   
     if(this.player.getDeck().isFull()){
-      this.dealText.removeInteractive();
+      this.playerDrawDeck.removeInteractive();
       this.cardCount.setText(`Players hand it full - Count: ${this.player.getDeck().getFilledSlots()}`);
     }else {
-      this.dealText.setInteractive();
+      this.playerDrawDeck.setInteractive();
       this.cardCount.setText(`Cards in Player hand ${this.player.getDeck().getFilledSlots()}`);
     }
     

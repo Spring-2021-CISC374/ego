@@ -33,9 +33,7 @@ export default class MainScene extends Phaser.Scene {
 
   preload(){
     this.load.image('player','src/assets/img/Light Bandit/Idle/LightBandit_Idle_0.png');
-    this.load.image('attackCardBase', 'src/assets/img/CardBases/attackcard.png');
-    this.load.image('healCardBase', 'src/assets/img/CardBases/healcard.png');
-    this.load.image('buffCardBase', 'src/assets/img/CardBases/buffcard.png');
+    
 
   }
 

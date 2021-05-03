@@ -6,7 +6,7 @@ export default class Deck {
   deck: Array<Card>;
 
   constructor(){
-    this.size = 12;
+    this.size = 7;
     this.deck = new Array<Card>() ;
 
   }
