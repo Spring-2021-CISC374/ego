@@ -1,6 +1,9 @@
 import 'phaser'
 import MainScene from './scenes/mainScene'
 import PreloadScene from './scenes/preloadScene'
+import WorldScene from './scenes/worldScene'
+import TutScene from './scenes/tutScene'
+//import HouseScene from './scenes/houseScene'
 // import BattleScene from './scenes/battleScene';
 
 const DEFAULT_WIDTH = 1280
@@ -16,12 +19,11 @@ const config = {
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT
   },
-  scene: [PreloadScene, MainScene],
+  scene: [PreloadScene,MainScene, WorldScene,TutScene],
   physics: {
     default: 'arcade',
     arcade: {
-      debug: false,
-      gravity: { y: 400 }
+      debug: false
     }
   }
 }
