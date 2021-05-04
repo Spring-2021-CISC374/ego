@@ -28,12 +28,17 @@ export default class MainScene extends Phaser.Scene {
 
   playerSprite;
   
+  HEIGHT;
+  WIDTH;
+
   constructor() {
     super({ key: 'MainScene' })
   }
 
   init(){
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.WIDTH = this.cameras.main.width;
+    this.HEIGHT = this.cameras.main.height;
   }
 
 
@@ -57,17 +62,17 @@ export default class MainScene extends Phaser.Scene {
     
   
 
-    this.playerSprite = this.add.sprite(this.cameras.main.width / 2,this.cameras.main.height / 2, 'player'); // Player Sprite
+    this.playerSprite = this.add.sprite(this.cameras.main.width / 2,this.cameras.main.height - 30, 'player'); // Player Sprite
 
-    this.dealText = this.add.text(100, 150, ['DRAW CARD'])
-    .setFontSize(18)
+    this.dealText = this.add.text(30, this.HEIGHT /2 + 150, ['DRAW CARD'])
+    .setFontSize(24)
     .setFontFamily('Trebuchet MS')
     .setColor('#000000')
     .setInteractive()
     .on('pointerdown', () => this.drawCard(this.player));
 
     //Interactive Text Box
-  this.clickButton = this.add.text(100, 100, `Change turn`, {
+  this.clickButton = this.add.text(this.WIDTH - 150, this.HEIGHT/2 - 75 , `End Turn`, {
     color: '#000000',
     fontSize: '24px'
   })
@@ -81,17 +86,16 @@ export default class MainScene extends Phaser.Scene {
   // })
 
   //Enemy Player Show health
-  this.enemyHealth= this.add.text(350, this.cameras.main.height / 2 - 75  , `Enemy Health: ${this.enemy.getHealth()}`, {
-    color: '#000000',
+  this.enemyHealth= this.add.text(30, this.cameras.main.height / 2 - 75  , `Enemy Health: ${this.enemy.getHealth()}`, {
+    color: '#ffffff',
     fontSize: '24px',
 
-  })
+  }).setDepth(1)
 
-  this.enemyHealth= this.add.text(350, this.cameras.main.height / 2 - 45  , `Enemy Energy: ${100}`, {
-    color: '#000000',
+  this.enemyHealth= this.add.text(30, this.cameras.main.height / 2 - 45  , `Enemy Energy: ${100}`, {
+    color: '#ffffff',
     fontSize: '24px',
-
-  })
+  }).setDepth(1);
 
 
   //Show Hand button
@@ -103,13 +107,13 @@ export default class MainScene extends Phaser.Scene {
   //   .on('pointerdown', () => this.displayDeck(this.player) );
   
   //Status indicator Text
-  this.statusBox = this.add.text(100,200, `Status Box: `,  {
+  this.statusBox = this.add.text(this.WIDTH / 2 - 125 ,0, `Status Box: `,  {
     color: '#000000',
     fontSize: '24px'
   });
 
   //Card Count indicator
-  this.cardCount = this.add.text(this.cameras.main.width - 225, 15, `Cards in Player hand ${this.player.getDeck().getFilledSlots()}`, {
+  this.cardCount = this.add.text(this.WIDTH - 15, this.HEIGHT - 45, `Cards in Player hand ${this.player.getDeck().getFilledSlots()}`, {
     color: '#000000',
     fontSize: '24px'
   }).setOrigin(1, 0)
@@ -121,10 +125,10 @@ export default class MainScene extends Phaser.Scene {
   })
   //.setOrigin(1,0)
 
-  this.shuffleText = this.add.text(100, 250, 'Shuffle Cards', {
-    color: '#000000',
-    fontSize: '24px',
-  })
+  this.shuffleText = this.add.text(30, this.HEIGHT /2 + 125,  'Shuffle Cards')
+  .setFontSize(24)
+  .setFontFamily('Trebuchet MS')
+  .setColor('#000000')
   .setInteractive()
   .on('pointerdown', ()=>this.player.playerDeck.shuffle())
 
@@ -177,7 +181,8 @@ export default class MainScene extends Phaser.Scene {
       this.drawCard(this.enemy);
       this.drawCard(this.enemy);
       this.drawCard(this.enemy);
-      this.displayDeck(this.enemy);
+      this.drawCard(this.enemy);
+
     }
     
     //console.log(player.isTurn());
@@ -189,7 +194,7 @@ export default class MainScene extends Phaser.Scene {
     let deck = player.getDeck().getDeck();
     
     deck.forEach((card,index) =>{
-      this.add.text(this.cameras.main.width - 600, index * 50 + 300  , `Name: ${card.name} Damage: ${card.damage} Cost: ${card.cost}` , {
+      this.add.text(this.cameras.main.width - 600, index * 50 + 600  , `Name: ${card.name} Damage: ${card.damage} Cost: ${card.cost}` , {
         color: '#000000',
         fontSize: '24px'
       })
@@ -243,18 +248,18 @@ s
         let card=this.add.graphics();
         card.lineStyle(5, 0x000000, 1.0);
         card.fillStyle(0xFFFFFF, 1.0);
-        card.fillRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), 300, 70, 100);
-        card.strokeRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), 300, 70, 100);
+        card.fillRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), this.HEIGHT - 110, 70, 100);
+        card.strokeRect((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2)), this.HEIGHT - 110, 70, 100);
   
-        let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, 305,i.getName(),{
+        let cardText=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, this.HEIGHT - 105,i.getName(),{
           color: '#000000',
           fontSize: '14px'
         });
-        let cardHappiness=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+55, 380,i.getHappiness(),{
+        let cardHappiness=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+55, this.HEIGHT - 30,i.getHappiness(),{
           color: '#000000',
           fontSize: '18px'
         });
-        let cardRank=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, 380,i.getRank(),{
+        let cardRank=this.add.text((c+1)*(this.cameras.main.width/(this.player.getHand().getSize()+2))+5, this.HEIGHT - 30,i.getRank(),{
           color: '#000000',
           fontSize: '18px'
         });
@@ -283,7 +288,7 @@ s
     }
 
     this.showHand();
-    this.statusBox.setText(`${(this.player.isTurn()) ? "Player can Draw Card" : "Player cannot draw card"}`)
+    this.statusBox.setText(`${(this.player.isTurn()) ? "Player Can Draw Card" : "Player Cannot Draw Card"}`)
     this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
 
     if(this.player.getHand().isFull()){
