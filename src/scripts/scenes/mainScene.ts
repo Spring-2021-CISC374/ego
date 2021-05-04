@@ -19,6 +19,7 @@ export default class MainScene extends Phaser.Scene {
   shuffleText
   enemy;
   enemyHealth;
+  goToWorld;
 
   message;
   statusBox;
@@ -26,12 +27,18 @@ export default class MainScene extends Phaser.Scene {
 
   playerSprite;
   
+  battleCounter: number;
+
   constructor() {
     super({ key: 'MainScene' })
   }
 
-  init(){
+
+  init(data)
+  {
     this.cursors = this.input.keyboard.createCursorKeys();
+    this.battleCounter = data.id;
+    console.log(this.battleCounter);
   }
 
 
@@ -51,6 +58,12 @@ export default class MainScene extends Phaser.Scene {
 
     this.player = new Player(this,"bob",false, true);// Player object
     this.enemy = new Player(this,"Computer",true, false);// Enemy player object
+    this.goToWorld = this.add.text(0, 700, ['Exit Battle'])
+    .setFontSize(18)
+    .setFontFamily('Trebuchet MS')
+    .setColor('#000000')
+    .setInteractive()
+    .on('pointerdown', () => this.changeScene('WorldScene'));
     this.initializeDeck();
     this.initializeHand();
     
@@ -125,6 +138,11 @@ export default class MainScene extends Phaser.Scene {
   this.healthBar=this.makeBar(100, 50, 0xe74c3c);
   this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
   
+  } //end of create
+
+  changeScene(word: string){
+    console.log('changing scenes...')
+    this.scene.start('WorldScene',{id:this.battleCounter+1,bool:false})
   }
 
   initializeDeck(){

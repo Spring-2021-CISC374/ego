@@ -1,0 +1,61 @@
+import Character from '../objects/character';
+
+export default class HouseScene extends Phaser.Scene {
+    
+    houseID;
+    char;
+    cursorKeys;
+
+    constructor() {
+        super({ key: 'WorldScene' })
+      }
+
+    init(data){
+        this.houseID = data.id;
+    }
+    preload(){
+        this.load.image("spriteSouth","assets/img/charSpriteSouth.png")
+        this.load.image("spriteNorth","assets/img/charSpriteNorth.png")
+        this.load.image("spriteEast","assets/img/charSpriteEast.png")
+        this.load.image("spriteWest","assets/img/charSpriteWest.png")
+        this.load.image('floor','assets/img/overworld/indoorTexture.png')
+    }
+
+    create(){
+        console.log("world scene created")
+        let background = this.add.sprite(0,0,'floor');
+        background.setDisplaySize(1280,720);
+        background.setOrigin(0,0);
+    
+        let houseLarge = this.add.sprite(750,400,'house1');
+        houseLarge.setDisplaySize(600,0)
+        houseLarge.setOrigin(0,0);
+    
+        this.cursorKeys = this.input.keyboard.createCursorKeys();
+    
+        this.char = this.add.image(64,100,"spriteNorth")
+    }
+
+    movePlayer(){
+        if (this.cursorKeys.up.isDown && this.char.y>64) {
+            this.char.y -= 3
+            this.char.setTexture("spriteNorth")
+          } else if (this.cursorKeys.down.isDown && this.char.y <720-64) {
+            this.char.y += 3
+            this.char.setTexture("spriteSouth")
+          }
+          if (this.cursorKeys.left.isDown&&this.char.x > 35) {
+            this.char.x -= 3
+            this.char.setTexture("spriteWest")
+          } else if (this.cursorKeys.right.isDown&& this.char.x <1280-64) {
+            this.char.x += 3
+            this.char.setTexture("spriteEast")
+          }
+        }
+      
+    update() { 
+        this.movePlayer();
+    }
+
+
+}
