@@ -49,8 +49,8 @@ export default class MainScene extends Phaser.Scene {
 
   create() {
 
-    this.player = new Player(this,"bob");// Player object
-    this.enemy = new Player(this,"Computer");// Enemy player object
+    this.player = new Player(this,"bob",false, true);// Player object
+    this.enemy = new Player(this,"Computer",true, false);// Enemy player object
     this.initializeDeck();
     this.initializeHand();
     
@@ -71,7 +71,7 @@ export default class MainScene extends Phaser.Scene {
     fontSize: '24px'
   })
     .setInteractive()
-    .on('pointerdown', () => this.endTurn(this.player) );
+    .on('pointerdown', () => this.switchTurn(this.player,this.enemy) );
 
   // //Player Show health
   // this.playerHeath= this.add.text(200, 15 , `Player health: ${this.player.getHealth()}`, {
@@ -160,25 +160,63 @@ export default class MainScene extends Phaser.Scene {
     this.drawCard(this.player);
     this.drawCard(this.player);
     this.drawCard(this.player);
-    this.drawCard(this.player);
-    this.drawCard(this.player);
-    this.drawCard(this.enemy);
-    this.drawCard(this.enemy);
     this.drawCard(this.enemy);
     this.drawCard(this.enemy);
     this.drawCard(this.enemy);
   }
 
-  endTurn(player: Player){
+  //easy enemy AI-attempts to use 2 random cards, then ends turn
+  easyEnemy(player: Player){
+    for(let tryCount=0; tryCount<2; tryCount++){
+        var card=Math.floor(Math.random()*player.getHand().getDeck().length);
+        this.useCard(player, player.getHand().getDeck()[card], this.player);
+    }
+    //console.log(this.enemy.getHand().getDeck());
+    this.switchTurn(player,this.player);
+  }
+
+  switchTurn(player: Player, opponent: Player){
+    player.changeTurn();
+    opponent.changeTurn();
+    console.log(player.getHand().getDeck());
+    console.log(opponent.getHand().getDeck());
+    if(player.isTurn()){
+      this.drawCard(player);
+      player.changeEnergy(1);
+      if(player.isEnemy){
+        this.easyEnemy(player);
+      }
+    }
+    else if(opponent.isTurn()){
+      this.drawCard(opponent);
+      opponent.changeEnergy(1);
+      if(opponent.isEnemy){
+        this.easyEnemy(opponent);
+      }
+    }
+  }
+
+  /*endTurn(player: Player){
     player.changeTurn();
     if(player.isTurn()){
-      this.clickButton.setText(`Change turn: It is ${player.getName()}'s turn `);  
+      this.clickButton.setText(`Change turn: It is ${player.getName()}'s turn `);
     }else{
       this.clickButton.setText(`Change turn: It is the computer's turn`);
       this.displayDeck(this.enemy);
     }
     
     //console.log(player.isTurn());
+  }*/
+
+  //attempts to use the selected card
+  useCard(player:Player, card:Card, opponent: Player){
+    if(player.getEnergy()>=card.getEnergy()){
+      player.changeEnergy(-card.getEnergy());
+      player.changeEnergy(card.getEnergyGain());
+      player.changeHealth(card.getHappiness());
+      player.changeShield(card.getShield());
+      opponent.changeHealth(-card.getDamage());
+    }
   }
 
   //Show Players Deck
@@ -201,11 +239,11 @@ export default class MainScene extends Phaser.Scene {
 
   // Draw a card and add to players hand
   drawCard(player: Player){
-    if(player.isTurn()){
+    if(player.getHand().getDeck().length<player.getHand().getSize()){
       if(player.playerDeck.deck.length!=0){
         player.addToHand(player.playerDeck.deck[0])
-        console.log(player.playerDeck);
-        console.log(player.playerHand);
+        //console.log(player.playerDeck);
+        //console.log(player.playerHand);
         // this.endTurn(player);
       }
       else{

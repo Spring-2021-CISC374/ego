@@ -11,7 +11,7 @@ import Card from './card';
 
 export default class Player  extends Phaser.GameObjects.GameObject{
 
-  PlayerTurn: boolean = true;
+  PlayerTurn: boolean;
   name: string;
   health: number;
   maxHealth: number = 100;
@@ -22,15 +22,20 @@ export default class Player  extends Phaser.GameObjects.GameObject{
   position: number[] = [0,0]
   energy: number;
   maxEnergy: number = 10;
+  shield: number;
+  isEnemy: boolean;
 
-  constructor(scene,name: string) {
+  constructor(scene,name: string, enemy:boolean, turn:boolean) {
     super(scene, 'sprite')
     this.name = name;
     this.health = 100;
     this.playerDeck = new Deck(30);
-    this.playerHand = new Deck(12);
+    this.playerHand = new Deck(5);
     this.discardPile = new Deck(30);
     this.health=this.maxHealth;
+    this.shield=0;
+    this.isEnemy=enemy;
+    this.PlayerTurn=turn;
 
     scene.add.existing(this)
     
@@ -108,13 +113,18 @@ export default class Player  extends Phaser.GameObjects.GameObject{
   public changeEnergy(change:number){
     this.energy=this.energy+change;
     if(this.energy<0){
-      this.health=0;
+      this.energy=0;
     }
     else if(this.energy>this.maxEnergy){
       this.energy=this.maxEnergy;
     }
+  }
 
-  
+  public changeShield(change:number){
+    this.shield=this.shield+change;
+    if(this.shield<0){
+      this.shield=0;
+    }
   }
 
   public setHealth(health){

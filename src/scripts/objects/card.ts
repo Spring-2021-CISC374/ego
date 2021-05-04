@@ -7,6 +7,9 @@ export default class Card {
   energy: number;
   damage : number;
   cost: number;
+  energyGain: number;
+  shield: number;
+
 
   constructor(name: string, type: string, rank: number, happiness: number, energy: number){
     this.name = name;
@@ -35,6 +38,18 @@ export default class Card {
 
   public getEnergy(): number{
     return this.energy;
+  }
+
+  public getEnergyGain(): number{
+    return this.energyGain;
+  }
+
+  public getShield(): number{
+    return this.shield;
+  }
+
+  public getDamage(): number{
+    return this.damage;
   }
 
   
