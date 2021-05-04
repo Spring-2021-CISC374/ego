@@ -4,7 +4,7 @@ export default class Card {
   cost : number;
   damage: number;
   index: number;
-
+  
   constructor(name: string, cost: number, damage : number, index: number){
     this.name = name;
     this.cost = cost;
