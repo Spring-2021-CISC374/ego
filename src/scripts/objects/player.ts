@@ -17,7 +17,9 @@ export default class Player  extends Phaser.GameObjects.GameObject{
   maxHealth: number = 100;
   playerDeck: Deck;
   count: number = 0;
-  position: number[] = [0,0]
+  position: number[] = [0,0];
+  energy: number;
+  maxEnergy: number = 20;
 
   constructor(scene,name: string) {
     super(scene, 'sprite')
@@ -25,6 +27,7 @@ export default class Player  extends Phaser.GameObjects.GameObject{
     this.health = 100;
     this.playerDeck = new Deck();
     this.health=this.maxHealth;
+    this.energy= this.maxEnergy;
 
     scene.add.existing(this)
     
@@ -64,6 +67,17 @@ export default class Player  extends Phaser.GameObjects.GameObject{
 
   public getDeck() : Deck{
     return this.playerDeck;
+  }
+  public getEnergy(card, c: number){
+    c= card.cost; 
+    this.energy= this.energy-c;
+    if(this.energy<0){
+      this.energy=0;
+    }
+
+  }
+  public getMaxenergy(){
+    return this.maxEnergy;
   }
 
   public getHealth(){

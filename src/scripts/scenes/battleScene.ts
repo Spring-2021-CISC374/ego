@@ -38,6 +38,8 @@ export default class BattleScene extends Phaser.Scene {
   enemy;
   enemyHealth;
   enemyHealthbar;
+  energyBar;
+  energyText;
 
   
 
@@ -126,7 +128,8 @@ export default class BattleScene extends Phaser.Scene {
     //Interactive Text Box
   this.clickButton = this.add.text(50, 480, `Change turn`, {
     color: '#000000',
-    fontSize: '24px'
+    fontSize: '24px',
+    fontStyle: 'bold'
   })
     .setInteractive()
     .on('pointerdown', () => this.endTurn(this.player) );
@@ -140,7 +143,8 @@ export default class BattleScene extends Phaser.Scene {
   //Enemy Player Show health
   this.enemyHealth= this.add.text(this.cameras.main.width - 300, 280 , `Enemy health: ${this.enemy.getHealth()}`, {
     color: '#000000',
-    fontSize: '24px'
+    fontSize: '24px',
+    fontStyle: 'bold'
   })
 
   //Show Hand button
@@ -154,33 +158,50 @@ export default class BattleScene extends Phaser.Scene {
   //Status indicator Text
   this.statusBox = this.add.text(500,500, `Status Box: `,  {
     color: '#000000',
-    fontSize: '24px'
+    fontSize: '24px',
+    fontStyle: 'bold'
   });
 
   //Card Count indicator
   this.cardCount = this.add.text(this.cameras.main.width - 400, 375, `Cards in Player hand: ${this.player.getDeck().getFilledSlots()}`, {
     color: '#000000',
-    fontSize: '24px'
+    fontSize: '24px',
+    fontStyle: 'bold'
   }).setOrigin(1, 0)
 
   //Sams Addition
   this.healthText=this.add.text(50, 375, `Current Health: ${this.player.getHealth()}/${this.player.getMaxHealth()}`,{
     color: '#000000',
-    fontSize: '24px'
+    fontSize: '24px',
+    fontStyle: 'bold'
   })
   //.setOrigin(1,0)
+
+  /*this.energyText=this.add.text(50, 375, `Player Energy: ${this.player.getEnergy()}/${this.player.getmax()}`,{
+    color: '#000000',
+    fontSize: '24px',
+    fontStyle: 'bold'
+  })
+*/
 
   this.shuffleText = this.add.text(50, 440, 'Shuffle Cards', {
     color: '#000000',
     fontSize: '24px',
+    fontStyle: 'bold'
+    //font: 'Press Start 2P'
   })
   .setInteractive()
   .on('pointerdown', ()=>this.player.playerDeck.shuffle())
 
   this.healthBar=this.makeBar(50, 405, 0xe74c3c);
   this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
+
   this.enemyHealthbar= this.makeBar(970, 310,0x0000ff);
 
+  //this.energyBar= this.makeBar()
+
+
+ // this.setValue(this.enemyHealthbar, this.)
 
 
 
@@ -207,9 +228,10 @@ export default class BattleScene extends Phaser.Scene {
     let deck = player.getDeck().getDeck();
     
     deck.forEach((card,index) =>{
-      this.add.text(this.cameras.main.width - 600, index * 50 + 300  , `Name: ${card.name} Damage: ${card.damage} Cost: ${card.cost}` , {
+      this.add.text(this.cameras.main.width - 900, index * 50 + 200  , `Name: ${card.name} Damage: ${card.damage} Cost: ${card.cost}` , {
         color: '#000000',
-        fontSize: '24px'
+        fontSize: '24px',
+        fontStyle: 'bold'
       })
     });
   }
