@@ -5,8 +5,13 @@ export default class Deck {
   size: number;
   deck: Array<Card>;
 
+<<<<<<< HEAD
   constructor(size:number){
     this.size = size;
+=======
+  constructor(){
+    this.size = 7;
+>>>>>>> merge/show-cards-scene-trigger
     this.deck = new Array<Card>() ;
 
   }

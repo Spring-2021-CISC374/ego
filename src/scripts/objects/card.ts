@@ -9,6 +9,8 @@ export default class Card {
   cost: number;
   energyGain: number;
   shield: number;
+  index: number;
+
 
 
   constructor(name: string, type: string, rank: number, happiness: number, energy: number){
@@ -18,6 +20,9 @@ export default class Card {
     this.happiness= happiness;
     this.energy= energy;
 
+  
+  
+  
   }
 
   public getName(): string{
@@ -52,9 +57,7 @@ export default class Card {
     return this.damage;
   }
 
-  
-
-
-
-
+  public getIndex(): number{
+    return this.index;
+  }
 }

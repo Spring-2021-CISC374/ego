@@ -24,6 +24,7 @@ export default class Player  extends Phaser.GameObjects.GameObject{
   maxEnergy: number = 10;
   shield: number;
   isEnemy: boolean;
+  
 
   constructor(scene,name: string, enemy:boolean, turn:boolean) {
     super(scene, 'sprite')
@@ -36,6 +37,7 @@ export default class Player  extends Phaser.GameObjects.GameObject{
     this.shield=0;
     this.isEnemy=enemy;
     this.PlayerTurn=turn;
+    this.energy= this.maxEnergy;
 
     scene.add.existing(this)
     
@@ -80,6 +82,17 @@ export default class Player  extends Phaser.GameObjects.GameObject{
 
   public getDeck() : Deck{
     return this.playerDeck;
+  }
+  public getEnergy(card, c: number){
+    c= card.cost; 
+    this.energy= this.energy-c;
+    if(this.energy<0){
+      this.energy=0;
+    }
+
+  }
+  public getMaxenergy(){
+    return this.maxEnergy;
   }
 
   public getHand():Deck{
