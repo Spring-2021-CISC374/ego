@@ -83,7 +83,7 @@ export default class Player  extends Phaser.GameObjects.GameObject{
   public getDeck() : Deck{
     return this.playerDeck;
   }
-  public getEnergy(card, c: number){
+  /*public getEnergy(card, c: number){
     c= card.cost; 
     this.energy= this.energy-c;
     if(this.energy<0){
@@ -91,6 +91,7 @@ export default class Player  extends Phaser.GameObjects.GameObject{
     }
 
   }
+  */
   public getMaxenergy(){
     return this.maxEnergy;
   }

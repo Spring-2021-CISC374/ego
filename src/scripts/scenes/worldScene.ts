@@ -82,7 +82,7 @@ export default class WorldScene extends Phaser.Scene {
     .setFontFamily('Trebuchet MS')
     .setColor('#000000')
     .setInteractive()
-    .on('pointerdown', () => this.scene.start('MainScene',{id:this.battleCounter}));
+    .on('pointerdown', () => this.scene.start('BattleScene',{id:this.battleCounter}));
 
     this.edlerText = this.add.text(1090, 150, ['Wise Elder'])
         .setFontSize(18)
@@ -105,7 +105,7 @@ export default class WorldScene extends Phaser.Scene {
       .setColor('#FFFFFF');
     }
     else{
-      this.scene.start('MainScene',{id:this.battleCounter});
+      this.scene.start('BattleScene',{id:this.battleCounter});
     }
     console.log("-----------");
   }

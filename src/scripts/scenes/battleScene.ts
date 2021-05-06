@@ -53,13 +53,13 @@
   playerSprite;
   background;
   
-//   constructor() {
-//     super({ key: 'BattleScene' })
-//   }
+   constructor() {
+     super({ key: 'BattleScene' })
+   }
 
-//   init(){
-//     this.cursors = this.input.keyboard.createCursorKeys();
-//   }
+   init(){
+     this.cursors = this.input.keyboard.createCursorKeys();
+   }
 
 
    preload() {
@@ -100,8 +100,8 @@
       width = this.game.config.width;
     }
 
-//     this.player = new Player(this,"bob");// Player object
-//     this.enemy = new Player(this,"Computer");// Enemy player object
+     this.player = new Player(this,"bob", false, true);// Player object
+     this.enemy = new Player(this,"Computer", true, false);// Enemy player object
   
 
     this.playerSprite = this.add.sprite(this.cameras.main.width / 2,this.cameras.main.height / 2, 'player'); // Player Sprite
@@ -248,87 +248,87 @@
       console.log(randCard);
       switch(randCard){
         case 1: {
-          player.addCard(new Card("Little Helper", 1, 0, 2));
+          player.addToHand(new Card("Little Helper","Health Recovery" ,1, 0, 2));
           break;
         }
 
         case 2: {
-          player.addCard(new Card("Pick Me Up", 2, 0, 3));
+          player.addToHand(new Card("Pick Me Up","Health Recovery", 2, 0, 3));
           break;
         }
 
         case 3: {
-          player.addCard(new Card("Super Smile", 3, 0, 4));
+          player.addToHand(new Card("Super Smile", "Health Recovery", 3, 0, 4));
           break;
         }
 
         case 4: {
-          player.addCard(new Card("Recover", 2, 0, 5));
+          player.addToHand(new Card("Recover", "Health Recovery", 2, 0, 5));
           break;
         }
 
         case 5: {
-          player.addCard(new Card("Reflect", 4, 7, 6));
+          player.addToHand(new Card("Reflect","Defense", 4, 7, 6));
           break;
         }
 
         case 6: {
-          player.addCard(new Card("Boom", 3, 5, 7));
+          player.addToHand(new Card("Boom", "Attack",  3, 5, 7));
           break;
         }
 
         case 7: {
-          player.addCard(new Card("BloodLust", 4, 7, 8));
+          player.addToHand(new Card("BloodLust","Attack", 4, 7, 8));
           break;
         }
 
         case 8: {
-          player.addCard(new Card("Lightning Bolt", 2, 3, 9));
+          player.addToHand(new Card("Lightning Bolt", "Attack", 2, 3, 9));
           break;
         }
 
         case 9: {
-          player.addCard(new Card("Counting Sheep", 3, 5, 10));
+          player.addToHand(new Card("Counting Sheep","Attack", 3, 5, 10));
           break;
         }
 
         case 10: {
-          player.addCard(new Card("Shield", 2, 0, 11));
+          player.addToHand(new Card("Shield","Defense",  2, 0, 11));
           break;
         }
 
         case 11: {
-          player.addCard(new Card("Power Boost", 3, 0, 12));
+          player.addToHand(new Card("Power Boost","Skill", 3, 0, 12));
           break;
         }
 
         case 12: {
-          player.addCard(new Card("Reflection Shield", 5, 0, 13));
+          player.addToHand(new Card("Reflection Shield",  'Defense', 5, 0, 13));
           break;
         }
 
         case 13: {
-          player.addCard(new Card("Fresh Water", 0, 0, 14));
+          player.addToHand(new Card("Fresh Water", "Skill", 0, 0, 14));
           break;
         }
 
         case 14: {
-          player.addCard(new Card("Home Cooked Meal", 0, 0, 15));
+          player.addToHand(new Card("Home Cooked Meal", "Skill", 0, 0, 15));
           break;
         }
 
         case 15: {
-          player.addCard(new Card("Apple", 0, 0, 16));
+          player.addToHand(new Card("Apple", "Skill", 0, 0, 16));
           break;
         }
 
         case 16: {
-          player.addCard(new Card("Win/Win Situation", 5, 5, 17));
+          player.addToHand(new Card("Win/Win Situation", "Attack", 5, 5, 17));
           break;
         }
 
         case 17:{
-          player.addCard(new Card("Power Nap", 5, 0, 18));
+          player.addToHand(new Card("Power Nap", "Defense", 5, 0, 18));
           break;
         }
       }
@@ -345,12 +345,12 @@
       */
       // this.endTurn(player);
       
-//       this.player.changeHealth(1);
-//     }
-//     else{
-//       this.player.changeHealth(-1);
-//     }
-//     this.showHand();
+       this.player.changeHealth(1);
+     }
+     else{
+       this.player.changeHealth(-1);
+     }
+     this.showHand();
     
    }
 
@@ -460,9 +460,9 @@
         */
         c++;
   
-//       }
-//     }
-//   }
+       }
+     }
+   }
 
   //Loads card sprite
   loadCardSprite(card, x, y){
@@ -513,27 +513,27 @@
 
 
 
-//   update() { 
+   update() { 
 
-//     const speed = 10;
-//     /**Movement  */
-//     if(this.cursors.left.isDown){
+     const speed = 10;
+     /**Movement  */
+     if(this.cursors.left.isDown){
       
-//     }else if (this.cursors.right.isDown){
-//       this
-//       this.scene.start('MainScene')
-//     }else if (this.cursors.up.isDown){
-//       console.log("Up");
-//     }else if (this.cursors.down.isDown){
-//       console.log("Down");
-//     }
+     }else if (this.cursors.right.isDown){
+       this
+       this.scene.start('MainScene')
+     }else if (this.cursors.up.isDown){
+       console.log("Up");
+     }else if (this.cursors.down.isDown){
+       console.log("Down");
+     }
 
     
 
-//     this.statusBox.setText(`${(this.player.isTurn()) ? "Player can Draw Card" : "Player cannot draw card"}`)
-//     this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
+     this.statusBox.setText(`${(this.player.isTurn()) ? "Player can Draw Card" : "Player cannot draw card"}`)
+     this.setValue(this.healthBar,this.player.getHealth()/this.player.getMaxHealth());
 
-//     this.showHand();
+     this.showHand();
   
     if(this.player.getDeck().isFull()){
       this.playerDrawDeck.removeInteractive();
@@ -543,10 +543,10 @@
       this.cardCount.setText(`Cards in Player hand: ${this.player.getDeck().getFilledSlots()}`);
     }
     
-//     this.healthText.setText(`Current Health: ${this.player.getHealth()}/${this.player.getMaxHealth()}`);
+     this.healthText.setText(`Current Health: ${this.player.getHealth()}/${this.player.getMaxHealth()}`);
 
 
-//   }
+   }
 
   
-// }
+ }
