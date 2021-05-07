@@ -1,20 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ES2015",
-    "module": "ES2015",
-
+    "target": "es5",
+    "module": "commonjs",
     "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-
-    "allowJs": true,
-    "allowUnreachableCode": false,
     "noImplicitAny": false,
+    "esModuleInterop": true,
+    "allowUnreachableCode": false,
     "sourceMap": true,
     "strictPropertyInitialization": false,
-
-    "moduleResolution": "node",
-    "lib": ["dom", "esnext"]
+    "lib": ["dom", "es5", "esnext", "scripthost"]
   }
 }
