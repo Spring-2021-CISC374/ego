@@ -177,7 +177,7 @@ export default class BattleScene extends Phaser.Scene {
   })
   //.setOrigin(1,0)
 
-  this.energyText=this.add.text(150, 375, `Player Energy: ${this.player.getEnergy()}/${this.player.getmax()}`,{
+  this.energyText=this.add.text(600, 375, `Player Energy: /20`,{
     color: '#000000',
     fontSize: '24px',
     fontStyle: 'bold'
@@ -199,7 +199,7 @@ export default class BattleScene extends Phaser.Scene {
   this.enemyHealthbar= this.makeBar(970, 310,0x0000ff);
 
 
-  this.energyBar= this.makeBar(1240, 450, 0xe74c3c);
+  this.energyBar= this.makeBar(600, 405, 0xe74c3c);
 
 
  // this.setValue(this.enemyHealthbar, this.)
@@ -381,7 +381,7 @@ export default class BattleScene extends Phaser.Scene {
     Vbar.x = x;
     Vbar.y = y;
 
-    return bar;
+    return Vbar;
   }
   showHand(){
     if(this.player.getDeck()!=null){
