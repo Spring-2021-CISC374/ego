@@ -163,7 +163,7 @@
   });
 
   //Card Count indicator
-  this.cardCount = this.add.text(this.cameras.main.width - 400, 375, `Cards in Player hand: ${this.player.getDeck().getFilledSlots()}`, {
+  this.cardCount = this.add.text(this.cameras.main.width - 900, 510, `Cards in Player hand: ${this.player.getDeck().getFilledSlots()}`, {
     color: '#000000',
     fontSize: '24px',
     fontStyle: 'bold'
@@ -177,12 +177,12 @@
   })
   //.setOrigin(1,0)
 
-  /*this.energyText=this.add.text(50, 375, `Player Energy: ${this.player.getEnergy()}/${this.player.getmax()}`,{
+  this.energyText=this.add.text(600, 375, `Player Energy: /20`,{
     color: '#000000',
     fontSize: '24px',
     fontStyle: 'bold'
   })
-*/
+
 
   this.shuffleText = this.add.text(50, 440, 'Shuffle Cards', {
     color: '#000000',
@@ -198,7 +198,8 @@
 
   this.enemyHealthbar= this.makeBar(970, 310,0x0000ff);
 
-  //this.energyBar= this.makeBar()
+
+  this.energyBar= this.makeBar(600, 405, 0xe74c3c);
 
 
  // this.setValue(this.enemyHealthbar, this.)
@@ -370,7 +371,18 @@
   setValue(bar,percentage) {
     bar.scaleX = percentage;
   }
+  makeVBar(x, y,color) {
+    let Vbar = this.add.graphics();
 
+    Vbar.fillStyle(color, 1);
+
+    Vbar.fillRect(0, 0, 25, 300);
+    
+    Vbar.x = x;
+    Vbar.y = y;
+
+    return Vbar;
+  }
   showHand(){
     if(this.player.getDeck()!=null){
       let c=1;
