@@ -2,7 +2,7 @@
   "name": "ego",
   "version": "0.0.2",
   "description": "Ego game",
-  "homepage": "https://github.com/Spring-2021-CISC374/ego#readme",
+  "homepage": "https://github.com/Spring-2021-CISC374/ego",
   "main": "index.js",
   "game": {
     "url": "ego",
