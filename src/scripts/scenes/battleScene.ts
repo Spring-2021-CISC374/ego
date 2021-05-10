@@ -141,7 +141,7 @@ export default class BattleScene extends Phaser.Scene {
   // })
 
   //Enemy Player Show health
-  this.enemyHealth= this.add.text(this.cameras.main.width - 300, 280 , `Enemy health: ${this.enemy.getHealth()}`, {
+  this.enemyHealth= this.add.text(this.cameras.main.width - 310, 280 , `Enemy health: ${this.enemy.getHealth()}/100`, {
     color: '#000000',
     fontSize: '24px',
     fontStyle: 'bold'
@@ -177,7 +177,7 @@ export default class BattleScene extends Phaser.Scene {
   })
   //.setOrigin(1,0)
 
-  this.energyText=this.add.text(600, 375, `Player Energy: /20`,{
+  this.energyText=this.add.text(600, 375, `Player Energy: ${this.player.getEnergy()} /${this.player.getMaxenergy()}`,{
     color: '#000000',
     fontSize: '24px',
     fontStyle: 'bold'
@@ -198,8 +198,9 @@ export default class BattleScene extends Phaser.Scene {
 
   this.enemyHealthbar= this.makeBar(970, 310,0x0000ff);
 
-
   this.energyBar= this.makeBar(600, 405, 0xe74c3c);
+  this.setValue2(this.energyBar, this.player.getEnergy()/this.player.getMaxenergy());
+
 
 
  // this.setValue(this.enemyHealthbar, this.)
@@ -366,6 +367,9 @@ export default class BattleScene extends Phaser.Scene {
     bar.y = y;
 
     return bar;
+  }
+  setValue2(Vbar, percentage) {
+    Vbar.scaleX =percentage;
   }
 
   setValue(bar,percentage) {
