@@ -2,7 +2,7 @@
   "name": "ego",
   "version": "0.0.2",
   "description": "Phaser 3 starter template for educational games, using TypeScript, webpack, and Github Pages.",
-  "homepage": "https://spring-2021-cisc374.github.io/ego/",
+  "homepage": "https://spring-2021-cisc374.github.io/ego/src#index",
   "main": "index.js",
   "game": {
     "url": "ego",
