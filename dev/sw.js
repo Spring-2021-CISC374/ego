@@ -1,4 +1,4 @@
-importScripts("/ego/betaprecache-manifest.2de2221010bddd81cbc5e8c1f46812c8.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
+importScripts("/ego/devprecache-manifest.fa9c99bc7ba5075373879b24d40b6d77.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 /**
  * You should only modify this, if you know what you are doing.
