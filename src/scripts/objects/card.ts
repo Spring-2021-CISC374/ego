@@ -1,41 +1,37 @@
 export default class Card {
 
   name: string;
+  cost : number;
+  effect: number;
+  index: number;
   type: string;
-  rank: number;
-  happiness: number;
-  energy: number;
-  damage : number;
-  cost: number;
-
-  constructor(name: string, type: string, rank: number, happiness: number, energy: number){
+  
+  constructor(name: string, type:string, cost: number, effect : number, index: number){
     this.name = name;
-    this.type= type;
-    this.rank= rank;
-    this.happiness= happiness;
-    this.energy= energy;
+    this.cost = cost;
+    this.effect = effect;
+    this.index = index;
+    this.type = type;
+  }
+  
 
+  public getCost(): number{
+    return this.cost;
   }
 
-  public getName(): string{
-    return this.name;
+  public getEffect(): number{
+    return this.effect;
   }
 
-  public getRank(): number{
-    return this.rank;
+  public getIndex(): number{
+    return this.index;
   }
 
   public getType(): string{
     return this.type;
   }
 
-  public getHappiness(): number{
-    return this.happiness;
+  public getName(): string {
+    return this.name;
   }
-
-  
-
-
-
-
 }

@@ -10,13 +10,36 @@ export default class Deck {
     this.deck = new Array<Card>() ;
 
   }
-
+  
+  shuffleCards(cards){
+    var currentIndex= cards.length, tempValue, randIndex;
+    var shufCards= new Array<Card>();
+    while (0!==currentIndex){
+      randIndex= Math.floor(Math.random()* currentIndex);
+      currentIndex -=1;
+      
+      tempValue= cards[currentIndex];
+      cards[currentIndex]= cards[randIndex];
+      cards[randIndex]= tempValue;
+    }
+      shufCards=cards;
+    return shufCards; 
+  }
+  /*makeDeck(cards){
+    
+    }
+  }*/
+  
   public getSize():number {
     return this.size;
   }
 
   public getDeck(){
     return this.deck;
+  }
+
+  public getCard(i: number){
+    return this.deck[i];
   }
 
   public isFull(): boolean{
