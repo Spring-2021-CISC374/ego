@@ -29,7 +29,8 @@ export default class MainScene extends Phaser.Scene {
   message;
   statusBox;
   cardCount;
-  
+  playerEnergybar;
+
   playerDrawDeck;
   enemyDrawDeck;
   background;
@@ -197,6 +198,8 @@ export default class MainScene extends Phaser.Scene {
   //this.enemyEnergyBar=this.makeBar(250, this.cameras.main.height / 2 - 45 , 0x000080);
   //this.setValue(this.enemyEnergyBar,100/*CURRENT ENERGY GOES HERE *// 100 /**MAX ENERGY GOES HERE */);
 
+  this.playerEnergybar=this.makeBar(600,400,  0xe74c3c);
+  //this.setValue(this.playerEnergybar, this.player.getEnergy()/this.player.getMaxEnergy);
   
   }
 

@@ -39,7 +39,7 @@ export default class IntroScene extends Phaser.Scene {
             }
             if (index==1)
             {
-                this.worldText = this.add.text(250, 275, ['Energy is collected throughout a round of Ego'])
+                this.worldText = this.add.text(150, 275, ['Energy is collected throughout a round of Ego'])
                 .setFontSize(40)
                 .setFontFamily('Copperplate')
                 .setColor('#FFFFFF')
@@ -47,16 +47,16 @@ export default class IntroScene extends Phaser.Scene {
             }
             if (index==2)
             {
-                this.worldText = this.add.text(130, 350, ['There are 3 main card types: Attacking, Defending and Healing.'])
-                .setFontSize(40)
+                this.worldText = this.add.text(50, 350, ['There are 3 main card types: Attacking, Defending and Healing.'])
+                .setFontSize(35)
                 .setFontFamily('Copperplate')
                 .setColor('#FFFFFF')
             }
 
             if(index==3)
             {
-                this.worldText = this.add.text(250, 425, ['Click on the character you would like to use in your adventure'])
-                .setFontSize(40)
+                this.worldText = this.add.text(100, 425, ['Click on the character you would like to use in your adventure'])
+                .setFontSize(35)
                 .setFontFamily('Georgia')
                 .setColor('#FFFF11')  
                 

@@ -44,7 +44,7 @@ export default class TutScene extends Phaser.Scene {
             if(index==1)
             {
                 this.worldText = this.add.text(50, 200, ['A Mysterious Dark Cloud has taken over and is hurting the House!'])
-                .setFontSize(40)
+                .setFontSize(35)
                 .setFontFamily('Copperplate')
                 .setColor('#FFFFFF') 
             }
@@ -81,7 +81,7 @@ export default class TutScene extends Phaser.Scene {
                 if(index==2)
                 {
                     this.worldText = this.add.text(50, 170, ['They create feelings of fear, dread, and uneasiness.'])
-                    .setFontSize(40)
+                    .setFontSize(35)
                     .setFontFamily('Copperplate')
                     .setColor('#FFFFFF')  
                 }
